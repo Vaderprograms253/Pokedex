@@ -75,10 +75,10 @@ public class MenuService
     }
 
     //DELETE
-    public void deleteDrink(Drink deleteDrink)
+    public void deleteDrink(String drinkName)
     {
         drinks = drinks.stream()
-                .filter(drink -> !drink.getName().equalsIgnoreCase(deleteDrink.getName()))
+                .filter(drink -> !drink.getName().equalsIgnoreCase(drinkName))
                 .toList();
     }
 }
