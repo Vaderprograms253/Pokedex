@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "f6b52e99-ed85-46d6-af72-0be70feaaf50",
+		"name": "Assignment queries",
+		"description": "**Saas Food truck app collection**\n\na mock api for a food truck\n\n**Author:** Xavier Denson\n\n**Class:** 372\n\n**Quarter:** Winter 2023\n\nEndpoints:\n\n- drinks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25672352"
+	},
+	"item": [
+		{
+			"name": "Get all drinks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/drinks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks"
+					]
+				},
+				"description": "Returns all drinnks.\n\nResponse code:\n\n- 200 - all drinks are returned"
+			},
+			"response": []
+		},
+		{
+			"name": "Drink by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/drinks/Cola",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks",
+						"Cola"
+					]
+				},
+				"description": "Returns a drink by name.\n\nResponse code:\n\n- 200 - if a drink is found\n- 404- if no drink is found"
+			},
+			"response": []
+		},
+		{
+			"name": "Drink by name (not found)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/drinks/Coffee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks",
+						"Coffee"
+					]
+				},
+				"description": "Returns a drink by name.\n\nResponse code:\n\n- 200 - if a drink is found\n- 404- if no drink is found"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Drink",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mr. Pib\",\r\n    \"caffeinated\": false,\r\n    \"sugarFree\": true,\r\n    \"calories\": 320,\r\n    \"ounces\": 72\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/drinks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks"
+					]
+				},
+				"description": "Adds a drink to drink list\n\nResponse codes:\n\n201 - if a drink is added\n\n400- if drink name is emtpy (Bad Request)"
+			},
+			"response": []
+		},
+		{
+			"name": "Add drink (Bad request)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"\",\r\n    \"caffeinated\": false,\r\n    \"sugarFree\": true,\r\n    \"calories\": 320,\r\n    \"ounces\": 72\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/drinks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks"
+					]
+				},
+				"description": "Adds a drink to drink list\n\nResponse codes:\n\n201 - if a drink is added\n\n400- if drink name is emtpy (Bad Request)"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Drink",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cola\",\r\n    \"caffeinated\": false,\r\n    \"sugarFree\": true,\r\n    \"calories\": 100,\r\n    \"ounces\": 24\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/drinks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks"
+					]
+				},
+				"description": "Updates a drink\n\nReponse Codes:\n\n200 - if a drink is succesfully updated\n\n400- if drink is not found"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Drink (Not Found)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Fanta\",\r\n    \"caffeinated\": false,\r\n    \"sugarFree\": true,\r\n    \"calories\": 100,\r\n    \"ounces\": 24\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/drinks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks"
+					]
+				},
+				"description": "Updates a drink\n\nReponse Codes:\n\n200 - if a drink is succesfully updated\n\n400- if drink is not found"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Drink",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/drinks/Coffee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drinks",
+						"Coffee"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
