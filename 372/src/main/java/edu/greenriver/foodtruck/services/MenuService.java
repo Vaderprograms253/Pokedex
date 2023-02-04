@@ -49,19 +49,20 @@ public class MenuService
     public Drink findDrinkByName(String drinkName)
     {
         return drinks.stream()
-                .filter(drink -> drink.getName().equals(drinkName))
+                .filter(drink -> drink.getName().equalsIgnoreCase(drinkName))
                 .findFirst()
                 .orElse(null);
     }
 
     //POST
-    public void addDrink(Drink newDrink)
+    public Drink addDrink(Drink newDrink)
     {
         drinks.add(newDrink);
+        return newDrink;
     }
 
     //PUT
-    public void updateDrink(Drink updatedDrink)
+    public Drink updateDrink(Drink updatedDrink)
     {
         Drink foundDrink = findDrinkByName(updatedDrink.getName());
         if (foundDrink != null)
@@ -72,13 +73,21 @@ public class MenuService
             foundDrink.setSugarFree(updatedDrink.isSugarFree());
             foundDrink.setOunces(updatedDrink.getOunces());
         }
+
+        return foundDrink;
     }
 
     //DELETE
     public void deleteDrink(String drinkName)
     {
-        drinks = drinks.stream()
+        drinks = new ArrayList<>(
+                drinks.stream()
                 .filter(drink -> !drink.getName().equalsIgnoreCase(drinkName))
-                .toList();
+                .toList());
+    }
+
+    public boolean validDrink(Drink drink)
+    {
+        return drink.getName() != null && !drink.getName().isEmpty();
     }
 }
