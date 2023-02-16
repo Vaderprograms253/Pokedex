@@ -15,7 +15,7 @@ public class Drink
     private boolean caffeinated;
     private boolean sugarFree;
     private int calories;
-    private int ounces;
+    private double price;
 
 
 }
