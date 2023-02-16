@@ -14,28 +14,28 @@ public class MenuService
                     .caffeinated(true)
                     .calories(300)
                     .name("Cola")
-                    .ounces(32)
+                    .price(3.50)
                     .sugarFree(false)
                     .build(),
             Drink.builder()
                     .caffeinated(false)
                     .calories(170)
                     .name("Lemonade")
-                    .ounces(24)
+                    .price(2.00)
                     .sugarFree(false)
                     .build(),
             Drink.builder()
                     .caffeinated(false)
                     .calories(15)
                     .name("Flavored Water")
-                    .ounces(32)
+                    .price(1.00)
                     .sugarFree(true)
                     .build(),
             Drink.builder()
                     .caffeinated(true)
                     .calories(150)
                     .name("Coffee")
-                    .ounces(24)
+                    .price(2.25)
                     .sugarFree(false)
                     .build()
     ));
@@ -71,7 +71,7 @@ public class MenuService
             foundDrink.setCaffeinated(updatedDrink.isCaffeinated());
             foundDrink.setName(updatedDrink.getName());
             foundDrink.setSugarFree(updatedDrink.isSugarFree());
-            foundDrink.setOunces(updatedDrink.getOunces());
+            foundDrink.setPrice(updatedDrink.getPrice());
         }
 
         return foundDrink;
