@@ -2,11 +2,44 @@ window.onload = function () {
     loadPage();
     addFormHandler();
 }
+let list;
+
 
 function addFormHandler()
 {
     let formBtn = document.getElementById("add-btn");
     formBtn.onclick = formSubmit;
+}
+
+function editHandler()
+{
+
+}
+
+function editDrink(drink)
+{
+    let tr = document.getElementById(drink.name);
+    console(drink);
+
+    let uri = "http://localhost:8080/drinks"
+    let params = {
+        method: "put",
+        mode: "cors",
+        body: JSON.stringify(newDrink),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    fetch(uri, params)
+        .then(function (response){
+            console.log(response);
+            return response.json();
+        })
+        .then(function (json){
+            console.log(json);
+            addNewDrink(json);
+        })
 }
 
 function formSubmit(event)
@@ -48,17 +81,17 @@ function formSubmit(event)
 
 }
 
-
 //method to append new elements
 function addNewDrink(drink)
 {
-    let list = document.getElementById("drinks");
+    list = document.getElementById("drinks");
 
     let drinkName = drink.name;
     let calories = drink.calories;
     let price = drink.price;
 
     let tr = document.createElement("tr");
+   // tr.setAttribute("id", drinkName);
     let td = document.createElement("td");
     td.innerHTML = drinkName;
     tr.appendChild(td);
@@ -75,17 +108,23 @@ function addNewDrink(drink)
     tr.appendChild(tdPrice);
 
     //add btn
-    let aEdit = document.createElement("a");
+    let btnEdit = document.createElement("button");
     let tdEdit = document.createElement("td");
-    aEdit.innerHTML = "Edit";
-    tdEdit.appendChild(aEdit);
+    btnEdit.innerHTML = "Edit";
+    let editBtnId = "edit-btn" + drink.name;
+    btnEdit.setAttribute("id", editBtnId);
+    btnEdit.setAttribute("href", "");
+    tdEdit.appendChild(btnEdit);
     tr.appendChild(tdEdit);
 
     //delete btn
-    let aDelete = document.createElement("a");
+    let btnDelete = document.createElement("button");
     let tdDelete = document.createElement("td");
-    aDelete.innerHTML = "Delete";
-    tdDelete.appendChild(aDelete);
+    btnDelete.innerHTML = "Delete";
+    let delBtnId = "del-btn" + drink.name;
+    btnDelete.setAttribute("onclick", "removeDrink(this.id)");
+    btnDelete.setAttribute("id", drinkName);
+    tdDelete.appendChild(btnDelete);
     tr.appendChild(tdDelete);
 }
 
@@ -108,9 +147,33 @@ function loadPage()
         })
 }
 
+ function removeDrink(drink)
+{
+    let uri = "http://localhost:8080/drinks/" + drink;
+    let params = {
+        method: "delete",
+        mode: "cors"
+    };
+    console.log(uri);
+
+     fetch(uri, params)
+        .then(function (response){
+           // console.log(response);
+            return response;
+        })
+        .then(function (json) {
+           // console.log(json);
+            deleteDrink(json);
+        })
+}
+
+function deleteDrink(drink)
+{
+    console.log(drink);
+}
+
 function showDrinks(drinks)
 {
-    let list = document.getElementById("drinks");
 
     for (let i = 0; i < drinks.length ; i++) {
 
