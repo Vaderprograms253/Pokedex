@@ -1,18 +1,33 @@
-nav
-{
+nav {
     background-color: #37C8AB;
 }
 
-.jumbotron
-{
-    background-color: #FFCC66;
+.container {
+    background-color: #37C8AB;
 }
 
-.button
-{
+#save-btn{
+    display: none;
+}
+
+.button {
     font-size: 16px;
     padding: 12px 28px;
     border: none;
     border-radius: 12px;
     background-color: #FFCC66;
+}
+
+body{
+    background-color: #FFCC66;
+    backdrop-filter: blur();
+}
+
+h1, h2, h3, h5 {
+    color: white;
+    text-shadow: 2px 2px 4px black, 0 0 25px #37C8AB, 0 0 5px green;
+}
+
+h5 {
+    font-style: italic;
 }

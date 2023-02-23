@@ -1,6 +1,7 @@
 window.onload = function () {
     loadPage();
     addFormHandler();
+    editHandler();
 }
 let list;
 
@@ -13,34 +14,10 @@ function addFormHandler()
 
 function editHandler()
 {
-
+    let saveBtn = document.getElementById("save-btn");
+    saveBtn.onclick = saveDrink;
 }
 
-function editDrink(drink)
-{
-    let tr = document.getElementById(drink.name);
-    console(drink);
-
-    let uri = "http://localhost:8080/drinks"
-    let params = {
-        method: "put",
-        mode: "cors",
-        body: JSON.stringify(newDrink),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-
-    fetch(uri, params)
-        .then(function (response){
-            console.log(response);
-            return response.json();
-        })
-        .then(function (json){
-            console.log(json);
-            addNewDrink(json);
-        })
-}
 
 function formSubmit(event)
 {
@@ -53,8 +30,6 @@ function formSubmit(event)
         calories: document.getElementById("drink_cal").value,
         caffeinated: true,
         sugarFree: true
-        //caffeinated: document.getElementById("caffeinated").value,
-       // sugarFree: document.getElementById("sugar-free").value
 
     };
 
@@ -91,19 +66,22 @@ function addNewDrink(drink)
     let price = drink.price;
 
     let tr = document.createElement("tr");
-   // tr.setAttribute("id", drinkName);
+    tr.setAttribute("id", "tr-" + drinkName);
     let td = document.createElement("td");
+    td.setAttribute("id", "td-name-" + drinkName);
     td.innerHTML = drinkName;
     tr.appendChild(td);
     list.appendChild(tr);
 
     //add calories
     let tdCalories = document.createElement("td");
+    tdCalories.setAttribute("id", "td-cal-"+ drinkName);
     tdCalories.innerHTML = calories;
     tr.appendChild(tdCalories);
 
-    //add price
+    //add name
     let tdPrice = document.createElement("td");
+    tdPrice.setAttribute("id", "td-price-" + drinkName);
     tdPrice.innerHTML = price;
     tr.appendChild(tdPrice);
 
@@ -113,7 +91,7 @@ function addNewDrink(drink)
     btnEdit.innerHTML = "Edit";
     let editBtnId = "edit-btn" + drink.name;
     btnEdit.setAttribute("id", editBtnId);
-    btnEdit.setAttribute("href", "");
+    btnEdit.setAttribute("onclick", "editDrink(this.id)");
     tdEdit.appendChild(btnEdit);
     tr.appendChild(tdEdit);
 
@@ -121,7 +99,6 @@ function addNewDrink(drink)
     let btnDelete = document.createElement("button");
     let tdDelete = document.createElement("td");
     btnDelete.innerHTML = "Delete";
-    let delBtnId = "del-btn" + drink.name;
     btnDelete.setAttribute("onclick", "removeDrink(this.id)");
     btnDelete.setAttribute("id", drinkName);
     tdDelete.appendChild(btnDelete);
@@ -147,6 +124,75 @@ function loadPage()
         })
 }
 
+function editDrink(editedDrink)
+{
+
+    let drink = editedDrink.slice(8);
+    let editBtn = document.getElementById("edit-btn" + drink);
+    let saveBtn = document.getElementById("save-btn")
+    editBtn.style.display = "none";
+    saveBtn.style.display = "block";
+    let name = document.getElementById("td-name-" + drink);
+    let cal = document.getElementById("td-cal-" + drink);
+    let price = document.getElementById("td-price-" + drink);
+    let nameValue = name.innerHTML;
+    let priceValue = price.innerHTML;
+    let calValue = cal.innerHTML;
+
+    name.innerHTML = "<input type='text' class='"+ drink +"' id='input-name-"+ drink +"' value='" + nameValue +"'> "
+    price.innerHTML = "<input type='text' class='"+ drink +"' id='input-price-"+ drink +"' value='" + priceValue +"'> "
+    cal.innerHTML = "<input type='text' class='"+ drink +"' id='input-cal-"+ drink +"' value='" + calValue +"'>"
+    document.getElementById("save-btn").addEventListener("click", function(event){
+        event.preventDefault();
+    });
+
+}
+
+function saveDrink(drink)
+{
+    let updatedDrink ={
+        name: document.getElementById("input-name-" + drink).value,
+        price: document.getElementById("input-price-" + drink).value,
+        calories: document.getElementById("input-cal-" + drink).value,
+        caffeinated: true,
+        sugarFree: true
+        //caffeinated: document.getElementById("caffeinated").value,
+        // sugarFree: document.getElementById("sugar-free").value
+
+    };
+
+    let uri = "http://localhost:8080/drinks"
+    let params = {
+        method: "put",
+        mode: "cors",
+        body: JSON.stringify(updatedDrink),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    fetch(uri, params)
+        .then(function (response){
+            console.log(response);
+            return response.json();
+        })
+        .then(function (json){
+            console.log(json);
+        })
+
+    let name = document.getElementById("input-name-" + drink).value;
+    let price = document.getElementById("input-price-" + drink).value;
+    let cal = document.getElementById("input-cal-" + drink).value;
+
+    document.getElementById("td-name-" +drink).innerHTML = name;
+    document.getElementById("td-cal-" +drink).innerHTML = cal;
+    document.getElementById("td-price-" +drink).innerHTML = price;
+
+
+}
+
+
+
  function removeDrink(drink)
 {
     let uri = "http://localhost:8080/drinks/" + drink;
@@ -154,22 +200,21 @@ function loadPage()
         method: "delete",
         mode: "cors"
     };
-    console.log(uri);
 
      fetch(uri, params)
         .then(function (response){
-           // console.log(response);
+            console.log(response);
             return response;
         })
         .then(function (json) {
-           // console.log(json);
-            deleteDrink(json);
+            console.log(json);
+            deleteDrink(drink);
         })
 }
 
-function deleteDrink(drink)
+function deleteDrink()
 {
-    console.log(drink);
+    window.location.reload();
 }
 
 function showDrinks(drinks)
