@@ -1,60 +1,58 @@
 package edu.greenriver.foodtruck.controllers;
 
-import edu.greenriver.foodtruck.models.Drink;
-import edu.greenriver.foodtruck.services.MenuService;
+import edu.greenriver.foodtruck.models.Pokemon;
+import edu.greenriver.foodtruck.services.PokeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("drinks")
+@RequestMapping("pokemon")
 public class MenuApi
 {
-    private MenuService service;
+    private PokeService service;
 
-    public MenuApi(MenuService service)
+    public MenuApi(PokeService service)
     {
         this.service = service;
     }
 
     //tested in Postman
     @GetMapping("")
-    public List<Drink> allDrinks()
+    public List<Pokemon> allPokemon()
     {
         return service.allDrinks();
     }
 
     //tested in Postman
-    @GetMapping("{drinkName}")
-    public ResponseEntity<Drink> drinkByName(@PathVariable String drinkName)
+    @GetMapping("{pokemonName}")
+    public ResponseEntity<Pokemon> pokemonByName(@PathVariable String pokemonName)
     {
-        if (service.findDrinkByName(drinkName) == null)
+        if (service.findPokemonByName(pokemonName) == null)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); //404
         }
 
-        return new ResponseEntity<>(service.findDrinkByName(drinkName), HttpStatus.OK); //200
+        return new ResponseEntity<>(service.findPokemonByName(pokemonName), HttpStatus.OK); //200
     }
 
     @PostMapping("")
-    public ResponseEntity<Drink> addDrink(@RequestBody Drink drink)
+    public ResponseEntity<Pokemon> addPokemon(@RequestBody Pokemon pokemon)
     {
-        if (!service.validDrink(drink))
+        if (!service.validDrink(pokemon))
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(service.addDrink(drink), HttpStatus.CREATED);//201
+        return new ResponseEntity<>(service.addDrink(pokemon), HttpStatus.CREATED);//201
     }
 
     @PutMapping("")
-    public ResponseEntity<Drink> updateDrink(@RequestBody Drink updatedDrink)
+    public ResponseEntity<Pokemon> updatePokemon(@RequestBody Pokemon updatedDrink)
     {
-        if (service.findDrinkByName(updatedDrink.getName()) == null)
+        if (service.findPokemonByName(updatedDrink.getName()) == null)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); //404
         }
@@ -68,10 +66,10 @@ public class MenuApi
     }
 
     @DeleteMapping("{drinkName}")
-    public ResponseEntity<Drink> deleteDrink(@PathVariable String drinkName)
+    public ResponseEntity<Pokemon> deleteDrink(@PathVariable String drinkName)
     {
-        service.deleteDrink(drinkName);
-        if (service.findDrinkByName(drinkName) == null)
+        service.deletePokemon(drinkName);
+        if (service.findPokemonByName(drinkName) == null)
         {
             return new ResponseEntity<>(HttpStatus.ACCEPTED); //202
         }
