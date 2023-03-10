@@ -1,7 +1,7 @@
-package edu.greenriver.foodtruck.controllers;
+package edu.greenriver.pokemon.controllers;
 
-import edu.greenriver.foodtruck.models.Pokemon;
-import edu.greenriver.foodtruck.services.PokeService;
+import edu.greenriver.pokemon.models.Pokemon;
+import edu.greenriver.pokemon.services.PokeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

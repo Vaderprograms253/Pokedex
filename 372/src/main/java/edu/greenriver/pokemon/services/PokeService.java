@@ -1,6 +1,6 @@
-package edu.greenriver.foodtruck.services;
+package edu.greenriver.pokemon.services;
 
-import edu.greenriver.foodtruck.models.Pokemon;
+import edu.greenriver.pokemon.models.Pokemon;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

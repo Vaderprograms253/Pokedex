@@ -1,4 +1,4 @@
-package edu.greenriver.foodtruck.models;
+package edu.greenriver.pokemon.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
