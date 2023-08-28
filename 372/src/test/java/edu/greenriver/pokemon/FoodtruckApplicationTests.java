@@ -1,4 +1,4 @@
-package edu.greenriver.foodtruck;
+package edu.greenriver.pokemon;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,9 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FoodtruckApplicationTests
 {
 
-    @Test
-    void contextLoads()
-    {
-    }
 
 }
