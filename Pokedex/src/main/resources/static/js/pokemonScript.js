@@ -28,6 +28,11 @@ function showPokemon(pokemon)
     pokemonTotal = pokemon.count;
     for (let i = 0; i < pokemonList.length; i++){
         let nextPokemon = pokemonList[i];
-        console.log(nextPokemon.name);
+        addNewPokemon(nextPokemon);
     }
+}
+
+function addNewPokemon(pokemon)
+{
+    console.log(pokemon.name);
 }
