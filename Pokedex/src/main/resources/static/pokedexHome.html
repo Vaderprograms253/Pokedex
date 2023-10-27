@@ -11,17 +11,56 @@
     <div class="jumbotron">
         <h1 class="text-center">Welcome to my Pokedex Site</h1>
     </div>
+    <div class="row">
+
+    </div>
     <div>
         <table id="pokeTable" class="display">
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Type</th>
             </tr>
             </thead>
             <tbody id="pokeTableBody">
 
             </tbody>
         </table>
+    </div>
+
+
+    <div class="modal" id="pokeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-name"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <img id="pokemonImage">
+                        </div>
+                        <div class="col">
+                            <div class="dropdown">
+                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Game appearances</button>
+
+                            <ul id="gameAppearances" class="dropdown-menu">
+
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 
